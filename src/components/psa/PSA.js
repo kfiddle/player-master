@@ -1,3 +1,4 @@
+import ConcertInput from "./ConcertInput";
 import styles from "./PSA.module.css";
 
 const PSA = (props) => {
@@ -34,27 +35,13 @@ const PSA = (props) => {
       </div>
 
       <form className={styles.psaForm}>
-        <div>
-          <h3>Pops 1</h3>
-          <div>
-            <label>Accept</label>
-            <input type="radio" />
-          </div>
+        <ConcertInput title="Pops Uno"/>
+        <ConcertInput title="Messiah"/>
+        <ConcertInput title="Sym 1"/>
+        <ConcertInput title="Pops 2"/>
 
-          <div>
-            <label>Decline</label>
-            <input type="radio" />
-          </div>
-        </div>
-        <div>
-          <h3>Messiah</h3>
-        </div>
-        <div>
-          <h3>Sym 1</h3>
-        </div>
-        <div>
-          <h3>Pops 2</h3>
-        </div>
+
+        <button>Submit</button>
       </form>
     </div>
   );
