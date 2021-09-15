@@ -1,0 +1,23 @@
+
+.outerContainer {
+    margin-top: 15rem;
+    display: grid;
+}
+
+.textDiv {
+    width: 70%;
+    margin: 1rem auto;
+    font-size: small;
+    font-weight: 700;
+}
+
+.masterAgreement {
+    display: inline-block;
+    color: rgb(160, 16, 16);
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.masterAgreement:hover {
+    color: rgb(214, 184, 11);
+}
