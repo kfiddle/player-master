@@ -16,3 +16,7 @@
   align-items: center;
   width: 30%;
 }
+
+.buttonLabel {
+    font-weight: 700;
+}

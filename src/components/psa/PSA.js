@@ -39,9 +39,10 @@ const PSA = (props) => {
         <ConcertInput title="Messiah"/>
         <ConcertInput title="Sym 1"/>
         <ConcertInput title="Pops 2"/>
+        <ConcertInput title="Beat Beethoven"/>
 
 
-        <button>Submit</button>
+        <button className={styles.submitButton}>Submit</button>
       </form>
     </div>
   );

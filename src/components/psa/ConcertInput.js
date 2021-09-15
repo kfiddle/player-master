@@ -6,11 +6,11 @@ const ConcertInput = (props) => {
       <h2 className={styles.title}>{props.title}</h2>
       <div className={styles.radioButtonsDiv}>
         <div>
-          <label>Accept</label>
+          <label className={styles.buttonLabel}>Accept</label>
           <input type="radio" />
         </div>
         <div>
-          <label>Decline</label>
+          <label className={styles.buttonLabel}>Decline</label>
           <input type="radio" />
         </div>
       </div>
