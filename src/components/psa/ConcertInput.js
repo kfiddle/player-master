@@ -12,8 +12,14 @@ const ConcertInput = (props) => {
       ? setSelectedState((previous) => [!previous[0], false])
       : setSelectedState((previous) => [false, !previous[1]]);
 
-    props.setInputState(props.performance, selectedState);
-    console.log("this one says " + selectedState);
+    props.setInputState(
+      props.performance,
+      selectedState[0] === true ? [false, true] : [true, false]
+    );
+  };
+
+  const sendUpAnswer = (answer) => {
+    props.testingMethod(props.performance, answer);
   };
 
   return (
@@ -28,6 +34,7 @@ const ConcertInput = (props) => {
             checked={selectedState[0]}
             onChange={() => {
               sendUpAnswerState("accept");
+              sendUpAnswer(true);
             }}
           />
         </div>
@@ -37,8 +44,9 @@ const ConcertInput = (props) => {
           <input
             type="radio"
             checked={selectedState[1]}
-            onChange={ () => {
+            onChange={() => {
               sendUpAnswerState("decline");
+              sendUpAnswer(false);
             }}
           />
         </div>

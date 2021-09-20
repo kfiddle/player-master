@@ -22,14 +22,18 @@ const PSA = (props) => {
 
   const putStateInList = (performance, state) => {
     console.log(performance, state)
-    let tempList = gigsWithAnswers;
-    for (let gigAndAnswer of tempList) {
-      if (gigAndAnswer.performance === performance) {
-        gigAndAnswer.answerState = state;
-      }
-    }
-    setGigsWithAnswers(tempList);
+    // let tempList = gigsWithAnswers;
+    // for (let gigAndAnswer of tempList) {
+    //   if (gigAndAnswer.performance === performance) {
+    //     gigAndAnswer.answerState = state;
+    //   }
+    // }
+    // setGigsWithAnswers(tempList);
   };
+
+  const testingMethod = (performance, state) => {
+    console.log(performance, state)
+  }
 
   const displayableConcerts = gigsWithAnswers.map((gigAnswer) => (
     <ConcertInput
@@ -37,6 +41,7 @@ const PSA = (props) => {
       label={gigAnswer.performance.title}
       key={gigAnswer.performance.id}
       setInputState={putStateInList}
+      testingMethod={testingMethod}
     />
   ));
 
