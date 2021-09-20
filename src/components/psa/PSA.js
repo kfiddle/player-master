@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 
 import GetAList from "../helperFunctions/GetAList";
-import PushBasic from '../helperFunctions/pushFunctions/PushBasic';
+import PushBasic from "../helperFunctions/pushFunctions/PushBasic";
 import ConcertInput from "./ConcertInput";
 import styles from "./PSA.module.css";
 
@@ -10,18 +10,24 @@ const PSA = (props) => {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [chosenPlayer, setChosenPlayer] = useState(null);
 
-  useEffect(async () => {
-    const gigsResponseList = await GetAList("get-all-performances");
-    let listToFill = [];
-    for (let performance of gigsResponseList) {
-      let answerState = false;
-      listToFill.push({ performance, answerState });
-    }
+  useEffect(() => {
+    const grabTheGigs = async () => {
+      const gigsResponseList = await GetAList("get-all-performances");
+      let listToFill = [];
+      for (let performance of gigsResponseList) {
+        let answerState = false;
+        listToFill.push({ performance, answerState });
+      }
+      setGigsWithAnswers(listToFill);
+    };
 
-    setGigsWithAnswers(listToFill);
+    const grabThePlayers = async () => {
+      const allContracts = await GetAList("get-all-contracted-players");
+      setListOfPlayers(allContracts);
+    };
 
-    const allContracts = await GetAList("get-all-contracted-players");
-    setListOfPlayers(allContracts);
+    grabTheGigs();
+    grabThePlayers();
   }, []);
 
   const putStateInList = (performance, acceptOrNot) => {
@@ -45,6 +51,7 @@ const PSA = (props) => {
 
   const choosePlayer = (player) => {
     setChosenPlayer(player);
+    // console.log(chosenPlayer.id)
   };
 
   const displayablePlayers = listOfPlayers.map((player) => (
@@ -59,14 +66,18 @@ const PSA = (props) => {
 
   const showAnswers = async (event) => {
     event.preventDefault();
-    console.log(gigsWithAnswers);
+    let listOfAnswers = [];
 
-    const playerAndAnswersObject = {
-      player: chosenPlayer.id,
-      availablePerformances: gigsWithAnswers,
-    };
-
-    const sendItUp = await PushBasic(playerAndAnswersObject, 'set-psa') 
+    for (let object of gigsWithAnswers) {
+      listOfAnswers.push({
+        performanceId: object.performance.id,
+        accepted: object.answerState,
+      });
+    }
+    const sendItUp = await PushBasic(
+      listOfAnswers,
+      chosenPlayer.id + "/set-psa"
+    );
   };
 
   return (
