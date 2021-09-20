@@ -13,24 +13,24 @@ const MainNavigation = (props) => {
       <nav className={classes.nav}>
         <ul>
           <div className={classes.newFormDiv}>
-            <li className={classes.navItem} onClick={props.playerEntryClicked}>
+            {/* <li className={classes.navItem} onClick={props.playerEntryClicked}>
               <FaUserPlus />
-            </li>
-            <li
+            </li> */}
+            {/* <li
               className={classes.navItem}
               onClick={props.pieceEntryClicked}
               style={{ marginRight: "3rem" }}
             >
               <GiBlackBook />
-            </li>
+            </li> */}
 
-            <li
+            {/* <li
               className={classes.navItem}
               onClick={props.instrumentEntryClicked}
               style={{ marginRight: "7rem" }}
             >
               <GiMusicalKeyboard />
-            </li>
+            </li> */}
 
 
 

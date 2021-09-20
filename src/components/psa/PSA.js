@@ -5,43 +5,35 @@ import ConcertInput from "./ConcertInput";
 import styles from "./PSA.module.css";
 
 const PSA = (props) => {
-  const [gigsList, setGigsList] = useState([]);
   const [gigsWithAnswers, setGigsWithAnswers] = useState([]);
 
   useEffect(async () => {
     const gigsResponseList = await GetAList("get-all-performances");
     let listToFill = [];
     for (let performance of gigsResponseList) {
-      let answerState = [];
+      let answerState = false;
       listToFill.push({ performance, answerState });
     }
 
     setGigsWithAnswers(listToFill);
-    setGigsList(gigsResponseList);
   }, []);
 
-  const putStateInList = (performance, state) => {
-    console.log(performance, state)
-    // let tempList = gigsWithAnswers;
-    // for (let gigAndAnswer of tempList) {
-    //   if (gigAndAnswer.performance === performance) {
-    //     gigAndAnswer.answerState = state;
-    //   }
-    // }
-    // setGigsWithAnswers(tempList);
+  const putStateInList = (performance, acceptOrNot) => {
+    let tempList = gigsWithAnswers;
+    for (let gigObject of tempList) {
+      if (gigObject.performance === performance) {
+        gigObject.answerState = acceptOrNot;
+      }
+    }
+    setGigsWithAnswers(tempList);
   };
-
-  const testingMethod = (performance, state) => {
-    console.log(performance, state)
-  }
 
   const displayableConcerts = gigsWithAnswers.map((gigAnswer) => (
     <ConcertInput
       performance={gigAnswer.performance}
       label={gigAnswer.performance.title}
       key={gigAnswer.performance.id}
-      setInputState={putStateInList}
-      testingMethod={testingMethod}
+      putStateInList={putStateInList}
     />
   ));
 
@@ -57,16 +49,19 @@ const PSA = (props) => {
           Dear so-and-so, this form will serve as your Personal Service
           Agreement, (PSA). Below is a listing of all the services you are being
           offered by the Erie Philharmonic for the 2022-23 season, as of April
-          22, 2022. As per the </p>
+          22, 2022. As per the{" "}
+        </p>
         <h2 className={styles.masterAgreement}>
           <a>Master Agreement</a>
-        </h2> <p>
-        , Article III(d), you must accept or decline these services no later
-        than June 30th of this year. Please check one of the boxes next to EACH
-        service listed below, indicating whether you intend to accept or decline
-        it. Once each service has been marked, click Submit to enter your
-        responses. Although you will be able to view your responses, you will
-        not be able to amend this form after June 30th. </p>
+        </h2>{" "}
+        <p>
+          , Article III(d), you must accept or decline these services no later
+          than June 30th of this year. Please check one of the boxes next to
+          EACH service listed below, indicating whether you intend to accept or
+          decline it. Once each service has been marked, click Submit to enter
+          your responses. Although you will be able to view your responses, you
+          will not be able to amend this form after June 30th.{" "}
+        </p>
         <p>
           For the 2022-23 season, the Erie Philharmonic is currently able to
           offer you a total of 46 services at the position of Concertmaster.
