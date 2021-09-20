@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import GetAList from "../helperFunctions/GetAList";
 import PushBasic from "../helperFunctions/pushFunctions/PushBasic";
@@ -51,7 +51,6 @@ const PSA = (props) => {
 
   const choosePlayer = (player) => {
     setChosenPlayer(player);
-    // console.log(chosenPlayer.id)
   };
 
   const displayablePlayers = listOfPlayers.map((player) => (
