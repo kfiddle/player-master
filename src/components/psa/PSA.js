@@ -1,11 +1,14 @@
 import { useRef, useEffect, useState } from "react";
 
 import GetAList from "../helperFunctions/GetAList";
+import PushBasic from '../helperFunctions/pushFunctions/PushBasic';
 import ConcertInput from "./ConcertInput";
 import styles from "./PSA.module.css";
 
 const PSA = (props) => {
   const [gigsWithAnswers, setGigsWithAnswers] = useState([]);
+  const [listOfPlayers, setListOfPlayers] = useState([]);
+  const [chosenPlayer, setChosenPlayer] = useState(null);
 
   useEffect(async () => {
     const gigsResponseList = await GetAList("get-all-performances");
@@ -16,6 +19,9 @@ const PSA = (props) => {
     }
 
     setGigsWithAnswers(listToFill);
+
+    const allContracts = await GetAList("get-all-contracted-players");
+    setListOfPlayers(allContracts);
   }, []);
 
   const putStateInList = (performance, acceptOrNot) => {
@@ -37,9 +43,30 @@ const PSA = (props) => {
     />
   ));
 
-  const showAnswers = (event) => {
+  const choosePlayer = (player) => {
+    setChosenPlayer(player);
+  };
+
+  const displayablePlayers = listOfPlayers.map((player) => (
+    <div
+      key={player.id}
+      style={{ margin: "2rem", cursor: "pointer" }}
+      onClick={() => choosePlayer(player)}
+    >
+      <h2>{player.lastName}</h2>
+    </div>
+  ));
+
+  const showAnswers = async (event) => {
     event.preventDefault();
     console.log(gigsWithAnswers);
+
+    const playerAndAnswersObject = {
+      player: chosenPlayer.id,
+      availablePerformances: gigsWithAnswers,
+    };
+
+    const sendItUp = await PushBasic(playerAndAnswersObject, 'set-psa') 
   };
 
   return (
@@ -64,7 +91,8 @@ const PSA = (props) => {
           per the
           <h2 className={styles.masterAgreement}>
             <a>Master Agreement</a>
-          </h2>, Article IV(b)
+          </h2>
+          , Article IV(b)
         </div>
       </div>
 
@@ -74,6 +102,7 @@ const PSA = (props) => {
           Submit
         </button>
       </form>
+      <div style={{ marginLeft: "12rem" }}>{displayablePlayers}</div>
     </div>
   );
 };
