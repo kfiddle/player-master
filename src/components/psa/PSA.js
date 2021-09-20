@@ -44,46 +44,32 @@ const PSA = (props) => {
 
   return (
     <div className={styles.outerContainer}>
-      <div className={styles.textDiv}>
-        <p>
+      <div className={styles.outerTextContainer}>
+        <div className={styles.psaText}>
           Dear so-and-so, this form will serve as your Personal Service
           Agreement, (PSA). Below is a listing of all the services you are being
           offered by the Erie Philharmonic for the 2022-23 season, as of April
           22, 2022. As per the{" "}
-        </p>
-        <h2 className={styles.masterAgreement}>
-          <a>Master Agreement</a>
-        </h2>{" "}
-        <p>
+          <h2 className={styles.masterAgreement}>
+            <a>Master Agreement</a>
+          </h2>{" "}
           , Article III(d), you must accept or decline these services no later
           than June 30th of this year. Please check one of the boxes next to
           EACH service listed below, indicating whether you intend to accept or
           decline it. Once each service has been marked, click Submit to enter
           your responses. Although you will be able to view your responses, you
-          will not be able to amend this form after June 30th.{" "}
-        </p>
-        <p>
-          For the 2022-23 season, the Erie Philharmonic is currently able to
-          offer you a total of 46 services at the position of Concertmaster.
-        </p>
-        <p>
-          You will be paid as per the{" "}
+          will not be able to amend this form after June 30th. For the 2022-23
+          season, the Erie Philharmonic is currently able to offer you a total
+          of 46 services at the position of Concertmaster. You will be paid as
+          per the
           <h2 className={styles.masterAgreement}>
             <a>Master Agreement</a>
-          </h2>
-          , Article IV(b)
-        </p>
+          </h2>, Article IV(b)
+        </div>
       </div>
 
       <form className={styles.psaForm}>
-        {/* <ConcertInput title="Pops Uno" />
-        <ConcertInput title="Messiah" />
-        <ConcertInput title="Sym 1" />
-        <ConcertInput title="Pops 2" />
-        <ConcertInput title="Beat Beethoven" /> */}
-
         {displayableConcerts}
-
         <button className={styles.submitButton} onClick={showAnswers}>
           Submit
         </button>

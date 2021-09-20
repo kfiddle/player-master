@@ -7,17 +7,6 @@ import styles from "./ConcertInput.module.css";
 const ConcertInput = (props) => {
   const [selectedState, setSelectedState] = useState([false, false]);
 
-  // const sendUpAnswerState = (whichInput) => {
-  //   whichInput === "accept"
-  //     ? setSelectedState((previous) => [!previous[0], false])
-  //     : setSelectedState((previous) => [false, !previous[1]]);
-
-  //   props.setInputState(
-  //     props.performance,
-  //     selectedState[0] === true ? [false, true] : [true, false]
-  //   );
-  // };
-
   const sendUpAnswer = (answer) => {
     answer === true
       ? setSelectedState((previous) => [!previous[0], false])
