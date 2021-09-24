@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Fragment } from "react/cjs/react.production.min";
 
 import GetAList from "../helperFunctions/GetAList";
 import PushBasic from "../helperFunctions/pushFunctions/PushBasic";
@@ -30,6 +31,15 @@ const PSA = (props) => {
     grabThePlayers();
   }, []);
 
+  const grabAvailablePlayers = async (performance) => {
+    const grabPlayersResponse = await PushBasic(
+      performance,
+      "get-players-from-performance"
+    );
+
+    const jsonified = await grabPlayersResponse.json();
+    console.log(jsonified);
+  };
   const putStateInList = (performance, acceptOrNot) => {
     let tempList = gigsWithAnswers;
     for (let gigObject of tempList) {
@@ -41,12 +51,17 @@ const PSA = (props) => {
   };
 
   const displayableConcerts = gigsWithAnswers.map((gigAnswer) => (
-    <ConcertInput
-      performance={gigAnswer.performance}
-      label={gigAnswer.performance.title}
-      key={gigAnswer.performance.id}
-      putStateInList={putStateInList}
-    />
+    <Fragment>
+      <ConcertInput
+        performance={gigAnswer.performance}
+        label={gigAnswer.performance.title}
+        key={gigAnswer.performance.id}
+        putStateInList={putStateInList}
+      />
+      <button onClick={() => grabAvailablePlayers(gigAnswer.performance)}>
+        Get Players
+      </button>
+    </Fragment>
   ));
 
   const choosePlayer = (player) => {
@@ -63,7 +78,7 @@ const PSA = (props) => {
     </div>
   ));
 
-  const showAnswers = async (event) => {
+  const submitAnswers = async (event) => {
     event.preventDefault();
     let listOfAnswers = [];
 
@@ -108,10 +123,11 @@ const PSA = (props) => {
 
       <form className={styles.psaForm}>
         {displayableConcerts}
-        <button className={styles.submitButton} onClick={showAnswers}>
+        <button className={styles.submitButton} onClick={submitAnswers}>
           Submit
         </button>
       </form>
+
       <div style={{ marginLeft: "12rem" }}>{displayablePlayers}</div>
     </div>
   );
