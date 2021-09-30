@@ -80,18 +80,20 @@ const PSA = (props) => {
 
   const submitAnswers = async (event) => {
     event.preventDefault();
-    let listOfAnswers = [];
+    // let listOfAnswers = [];
 
     for (let object of gigsWithAnswers) {
-      listOfAnswers.push({
-        performanceId: object.performance.id,
-        accepted: object.answerState,
-      });
+      const sendUpReply = await PushBasic(
+        {
+          player: chosenPlayer,
+          performance: object.performance,
+          available: object.answerState,
+        },
+        "add-reply"
+      );
     }
-    const sendItUp = await PushBasic(
-      listOfAnswers,
-      chosenPlayer.id + "/set-psa"
-    );
+
+    console.log(gigsWithAnswers);
   };
 
   return (
