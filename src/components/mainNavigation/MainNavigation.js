@@ -8,14 +8,14 @@ const MainNavigation = (props) => {
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
-        <h1>Erie Philharmonic Musician Page </h1>
+        <h1>Erie Philharmonic</h1>
       </div>
       <nav className={classes.nav}>
         <ul>
           <div className={classes.newFormDiv}>
-            {/* <li className={classes.navItem} onClick={props.playerEntryClicked}>
+            <li className={classes.navItem} onClick={props.playerEntryClicked}>
               <FaUserPlus />
-            </li> */}
+            </li>
             {/* <li
               className={classes.navItem}
               onClick={props.pieceEntryClicked}
@@ -31,9 +31,6 @@ const MainNavigation = (props) => {
             >
               <GiMusicalKeyboard />
             </li> */}
-
-
-
           </div>
 
           {/* <li className={classes.navItem}>

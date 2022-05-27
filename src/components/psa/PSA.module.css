@@ -1,6 +1,28 @@
 .outerContainer {
-  margin-top: 15rem;
   display: grid;
+  border-radius: 30px;
+  color: rgb(227, 212, 212);
+
+  /* ff 3.6+ */
+  background:-moz-radial-gradient(circle at 8% 7%, rgba(44, 6, 1, 1) 0%, rgba(127, 10, 21, 0.98) 100%);
+
+  /* safari 5.1+,chrome 10+ */
+  background:-webkit-radial-gradient(circle at 8% 7%, rgba(44, 6, 1, 1) 0%, rgba(127, 10, 21, 0.98) 100%);
+
+  /* opera 11.10+ */
+  background:-o-radial-gradient(circle at 8% 7%, rgba(44, 6, 1, 1) 0%, rgba(127, 10, 21, 0.98) 100%);
+
+  /* ie 10+ */
+  background:-ms-radial-gradient(circle at 8% 7%, rgba(44, 6, 1, 1) 0%, rgba(127, 10, 21, 0.98) 100%);
+
+  /* global 92%+ browsers support */
+  background:radial-gradient(circle at 8% 7%, rgba(44, 6, 1, 1) 0%, rgba(127, 10, 21, 0.98) 100%);
+
+
+
+
+
+
 }
 
 .outerTextContainer {

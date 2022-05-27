@@ -58,9 +58,6 @@ const PSA = (props) => {
         key={gigAnswer.performance.id}
         putStateInList={putStateInList}
       />
-      <button onClick={() => grabAvailablePlayers(gigAnswer.performance)}>
-        Get Players
-      </button>
     </Fragment>
   ));
 
@@ -80,7 +77,6 @@ const PSA = (props) => {
 
   const submitAnswers = async (event) => {
     event.preventDefault();
-    // let listOfAnswers = [];
 
     for (let object of gigsWithAnswers) {
       const sendUpReply = await PushBasic(
